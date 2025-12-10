@@ -10,16 +10,7 @@ Podemos pensarla como una cadena de particulas cuanticas interactuando en el tie
 Las redes FANN [2] son una clase de Red Neuronal Artificial biologicamente inspirada. Esta inspiracion viene dada tanto por su arquitectura como por su funcionamiento ya que tienen asociada una dinamica neuronal la cual define que pasa en una neurona que esta siendo estimulada a traves de sus conexiones dendriticas. Como definidas en [2] tenemos principalmente 3 clases de arquitectura FANN (TWC, FC y SA). El analisis del presente trabajo esta basado en el uso de las arquitecturas FC ya que se centra en el estudio del impacto de cambiar (en un mismo modelo) la representacion del estado de la cadena de transmision de Qubits y las arquitecturas TWC siempre tienen la misma cantidad de neuronas de entrada mientras que en las FC se puede definir dicha cantidad a necesidad. Por otro lado tambien quedan excluidas de este analisis las arquitecturas SA ya que cada entrenamiento de estas en realidad genera una nueva red neuronal diferente a la de otro entrenamiento invalidando la posibilidad aislar la comparacion solamente a la representacion del estado de la cadena.
 En [2] estas redes son usadas conjuntamente con RL para encontrar una solucion al problema  
 
-Fiuri Artificial Neural Networks (FANN) are biologically inspired artificial
-neural networks as presented in [3], but in this work, we extended that method
-to some kind of fully connected architecture, which allows us to have multiple
-intermediate layers. We added a new connection behavior, trying to simulate the
-modulation mechanism in the neuron information transmission (that version of
-the model includes an M in its name). A FANN is a compound of neurons
-with a discrete dynamic, which is in charge of describing its behavior. The inter-
-neuronal connections also have a well-defined behavior depending on their type
-(excitatory, inhibitory, or electrical). That dynamics (shown in table 1) describes
-how the neuron reacts when stimuli are coming from its dendritic connections.
+
 ### KR
 ## Desarrollo experimental
 ## Resultados
