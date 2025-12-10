@@ -1,2 +1,7 @@
-# Representacion del conocimineto aplicado a FANN para Qbits. 
-Knowledge Representation
+# Representacion del conocimiento aplicado a FANN para Qbits. 
+## Abstract
+## Introduccion
+## Background
+## Desarrollo experimental
+## Resultados
+## Conclusiones
