@@ -32,5 +32,6 @@ En este trabajo se prueba alimentar a la red con:
 
 
 ## Desarrollo experimental
+## Analisis estadisticos
 ## Resultados
 ## Conclusiones
