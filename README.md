@@ -20,9 +20,23 @@ Podemos pensarla como una cadena de partículas cuánticas interactuando en el t
 <img src="QbitChain.png" width="500" />
 
 ### FANN & RL
-Las redes FANN [2] son una clase de Red Neuronal Artificial biológicamente inspirada. Esta inspiración viene dada tanto por su arquitectura como por su funcionamiento ya que tienen asociada una dinámica neuronal la cual define que pasa en una neurona que esta siendo estimulada a través de sus conexiones dendríticas. Como definidas en [2] tenemos principalmente 3 clases de arquitectura FANN (TWC, FC y SA). El análisis del presente trabajo esta basado en el uso de las arquitecturas FC ya que se centra en el estudio del impacto de cambiar (en un mismo modelo) la representación del estado de la cadena de transmisión de Qubits y las arquitecturas TWC siempre tienen la misma cantidad de neuronas de entrada mientras que en las FC se puede definir dicha cantidad a necesidad. Por otro lado también quedan excluidas de este análisis las arquitecturas SA ya que cada entrenamiento de éstas en realidad genera una nueva red neuronal diferente a la de otro entrenamiento invalidando la posibilidad aislar la comparación solamente a la representación del estado de la cadena.
-En [2] estas redes son usadas conjuntamente con RL para encontrar una solución al problema.  
+Las redes FANN [2] son una clase de Red Neuronal Artificial biológicamente inspirada. Esta inspiración viene dada tanto por su arquitectura como por su funcionamiento y composición ya que tienen asociada una dinámica neuronal la cual define que pasa en una neurona que esta siendo estimulada a través de sus conexiones dendríticas, las cuales a su vez pueden ser inhibitorias, exitatorias o eléctricas. Como definidas en [2] tenemos principalmente 4 clases de arquitectura FANN (TWC, FC y sos modificaciones SA). El análisis del presente trabajo esta basado en el uso de las arquitecturas FC ya que se centra en el estudio del impacto de cambiar (en un mismo modelo) la representación del estado de la cadena de transmisión de Qubits y las arquitecturas TWC siempre tienen la misma cantidad de neuronas de entrada mientras que en las FC se puede definir dicha cantidad a necesidad. Por otro lado también quedan excluidas de este análisis las arquitecturas SA ya que cada entrenamiento de éstas en realidad genera una nueva red neuronal diferente a la de otro entrenamiento invalidando la posibilidad aislar la comparación solamente a la representación del estado de la cadena.
+En las imágenes de abajo se ven ejemplos de todas estas arquitecturas, sólo a modo informativo son brevemente descriptas aquí, el lector interesado en tener mas detalles puede consultar [2]. 
 
+<ul>
+
+  <li>
+    TWC: Este circuito es es un modelo exacto de un circuito encontrado en un ser vivo, consta de 11 neuronas y 26 conexiones. 4 neuronas son de entrada (triangulares no verdes), dos son de salida (triangulares verdes) y 5 internas, en esas imágenes están rotuladas las conexiones con sus pesos en el momento en que fueron tomadas las imágenes. Las neuronaes tasán rotuladas con los valores de sus estados internos.
+  </li>  
+  <li>  
+FC: Estas redes son al estilo de las Fully Connected encontradas en el Deep Learning clásico, cada neurona de cada capa está conectada con todas las de la capa siguiente, se respeta una proporción aproximada entre las diferentes clases de conexiones con respecto a lo observado en TWC y sólo tiene una neurona de salida.
+      </li>  
+  <li>  
+SA: Shuffle Architecture es la arquitectura obtenida a partir de una arquitectura básica (TWC o FC) pero justo antes del entrenamiento las conexiones son aleatoriamente mezcladas cambiando así el trazado original. Esta arquitectura es básicamente diferente en cada entrenamiento. 
+      </li>  
+
+<ul>
+  
 Ejemplos de TWC y TWC - SA
 
 <img src="TWC.png" width="700" />
@@ -30,6 +44,8 @@ Ejemplos de TWC y TWC - SA
 Ejemplos de FC y FC - SA
 
 <img src="FC.png" width="700" />
+
+En [2] estas redes son usadas conjuntamente con RL para encontrar una solución al problema. Ahí se implementa un environment desde el punto de vista de Reinforcement Learning. La parte que nos interesa conocer en este momento es que este environment modela el Qbit transmission control problem exponiendo como descriptor de estado el vector de estado de las partículas cuánticas $\vec{e}$, desde donde se sacan las 4 versiones de características que serán pasadas a la FANN   
 
 ### KR
 La representación del conocimiento constituye un pilar fundamental en el desarrollo de sistemas de inteligencia artificial ya que determina cómo la información del mundo real o del problema modelado es estructurada y procesada por los componentes algoritmicos. En el contexto del machine learning, esta representación adquiere especial relevancia al influir directamente en la capacidad de un modelo para aprender patrones útiles a partir de los datos. En el ambito de las redes neuronales artificiales el desempeño depende en gran medida de la calidad y la forma en que se presentan sus entradas.
