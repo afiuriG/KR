@@ -34,12 +34,12 @@ Ejemplos de FC y FC - SA
 ### KR
 La representación del conocimiento constituye un pilar fundamental en el desarrollo de sistemas de inteligencia artificial ya que determina cómo la información del mundo real o del problema modelado es estructurada y procesada por los componentes algoritmicos. En el contexto del machine learning, esta representación adquiere especial relevancia al influir directamente en la capacidad de un modelo para aprender patrones útiles a partir de los datos. En el ambito de las redes neuronales artificiales el desempeño depende en gran medida de la calidad y la forma en que se presentan sus entradas.
 La cantidad de entradas o número de características de una red neuronal es un aspecto crítico de su funcionamiento puesto que define el espacio de información disponible para el aprendizaje. Una representación innecesariamente amplia puede introducir ruido, redundancias y costos computacionales elevados, mientras que una representación insuficiente puede limitar la capacidad del modelo para capturar relaciones relevantes. Este trabajo intenta discernir el impacto de 4 diferentes formas de representar el conocimiento para el caso del problema de cadenas de transmision de Qubits. Como bien se dijo antes, el estado de la cadena es un vector de numeros complejos, cada uno representando el estado cuantico de una particula en la cadena por lo que el tamaño del vector es igual a la longitud de la cadena.
-En este trabajo se prueba alimentar a la red con:
+Si $\vec{e}=((r_1,i_1),...,(r_n,i_n))$ es el estado de una cadena de longitud $n$, en este trabajo se prueba alimentar a las redes que buscan una solucion con 4 aproximaciones diferentes:
 <ul>
-  <li>solo la parte compleja del estado</li>
-  <li>solo la parte real del estado</li>
-  <li>el estado completo</li>
-  <li>solo 2 magnitudes representando la posicion y magnitud de la cresta de la onda</li>
+  <li>Sólo la parte imaginaria del estado: en este caso la red neuronal tiene $n$ neuronas de entrada y se la alimenta con $(i_1),...,(i_n)$.</li>
+  <li>Sólo la parte real del estado: en este caso la red neuronal tiene $n$ neuronas de entrada y se la alimenta con $(r_1),...,(r_n)$. </li>
+  <li>El estado completo: en este caso la red neuronal tiene $2*n$ neuronas de entrada y se la alimenta con $\vec{e}$.</li>
+  <li>Sólo 2 valores representando la posición y magnitud de la cresta de la onda: en este caso la red tiene sólo $2$ neuronas de entrada y se la alimenta con los valores $a,p$ donde  $(\forall i: 1 \leq i \leq n:  \vert{c_i}\vert{} \leq a)$ y $p=i$ con $a=\vert{c_i}\vert{}$.</li>
 </ul>
 
 
