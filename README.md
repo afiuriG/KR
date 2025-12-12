@@ -47,6 +47,7 @@ Ejemplos de FC y FC - SA
 
 En [2] estas redes son usadas conjuntamente con RL para encontrar una solución al problema. Ahí se implementa un environment desde el punto de vista de Reinforcement Learning. La parte que nos interesa conocer en este momento es que este environment modela el Qbit transmission control problem exponiendo como descriptor de estado el vector de estado de las partículas cuánticas $\vec{e}$, desde donde se sacan las 4 versiones de características que serán pasadas a la FANN. La salida de esta red neuronal es directamente traducida a una acción a ser ejecutada sobre dicho environemnt el cual es básicamente la posición de la particula a ser influenciada en ese momento. Funciones de recompensa y finalización también se implementaron para hacer posible el aprendizaje por RL.   
 
+
 ### Representación del conocimiento
 La representación del conocimiento constituye un pilar fundamental en el desarrollo de sistemas de inteligencia artificial ya que determina cómo la información del mundo real o del problema modelado es estructurada y procesada por los componentes algoritmicos. En el contexto del machine learning, esta representación adquiere especial relevancia al influir directamente en la capacidad de un modelo para aprender patrones útiles a partir de los datos. En el ámbito de las redes neuronales artificiales el desempeño depende en gran medida de la calidad y la forma en que se presentan sus entradas.
 La cantidad de entradas o número de características de una red neuronal es un aspecto crítico de su funcionamiento puesto que define el espacio de información disponible para el aprendizaje. Una representación innecesariamente amplia puede introducir ruido, redundancias y costos computacionales elevados, mientras que una representación insuficiente puede limitar la capacidad del modelo para capturar relaciones relevantes. Este trabajo intenta discernir el impacto de 4 diferentes formas de representar el conocimiento para el caso del problema de cadenas de transmisión de Qubits. Como bien se dijo antes, el estado de la cadena es un vector de números complejos, cada uno representando el estado cuántico de una partícula en la cadena por lo que el tamaño del vector es igual a la longitud de la cadena.
@@ -57,10 +58,77 @@ Si $\vec{e}=((r_1,i_1),...,(r_n,i_n))$ es el estado de una cadena de longitud $n
   <li>El estado completo: en este caso la red neuronal tiene $2*n$ neuronas de entrada y se la alimenta con $\vec{e}$.</li>
   <li>Sólo 2 valores representando la posición y magnitud de la cresta de la onda: en este caso la red tiene sólo $2$ neuronas de entrada y se la alimenta con los valores $a,p$ donde  $(\forall i: 1 \leq i \leq n:  \vert{c_i}\vert{} \leq a)$ y $p=i$ con $a=\vert{c_i}\vert{}$.</li>
 </ul>
+Como notación se define que el nombre del modelo al que se quiere hacer referencia deberá tener un subíndice indicando el tipo de representación que se asume para ese modelo, asi entonces una red $FC_{label}$ indicará que a FC se la entrena y evalúa con la modalidad $label \in {r,i,c,ci}$ donde $r$ se usará para indicar que las características son la parte real del estado $\vec{e}$, $i$ se usará para denotar que las entradas serán la parte imaginaria de $\vec{e}$, $c$ se usará para $\vec{e}$ y $ci$ para los valores que representan el estado de la onda.  
 
 
 
 ## Desarrollo experimental
+
+### Objeto de estudio
+Dentro de la arquitectura FC, en [2] se presentan algunas variantes. En primer lugar están definidas las FC clásicas, las cuales llamaremos simplemente FC y que son básicamente como se describió anteriormente, aparecen también la variante llamada MFC la que agrega un mecanismo de modulación en el comportamiento de las conexiones y por último aparecen las CIFC y CIMFC las cuales tienen el prefijo CI (por condensed information) debido a que usan sólo dos caracteristicas de entrada por lo tanto tienen sólo dos neuronas en su capa de entrada.   
+Como objeto de estudio tomaremos los modelos que intentan resolver el problema de transmisión de Qubits para una cadena de longitud 10 por lo que las redes FC y MFC tendrán tantas neuronas de entrada como características se les quiera pasar. Según la notación presentada con anterioridad en este trabajo deberíamos llamar a los modelos $CIFC$ y $CIMFC$ como $CIFC_{ci}$ y $CIMFC_{ci}$  respectivamente, estos tienen 2 neuronas de entrada. Los modelos $FC_{k}$ y $MFC_{k}$  para $k \in (r,i)$ tienen 10 neuronas de entrada y por último $FC_{c}$ y $MFC_{c}$ tienen 20 neuronas de entrada. En todos los casos en [2] se mantiene aproximadamente una proporción entre la cantidad de neuronas de entrada y las que tiene la capa intermedia, sólo se usaron modelos con una sola capa intermedia como en [2]. la siguiente tabla muestra la cantidad total de ...... 
+
+|Modelo |Neuronas  |Conexiones|Parámetros|
+| :---------- | :---------------------: | :---------------------: | :--------: |
+|campo        |Uno          | Dos  |Tres|
+
+
+\begin{table}
+\vspace{-.0cm}
+\caption{\scriptsize{FANN's dynamical configuration. For each architecture number of neurons and connection are shown grouped by type. $np$ and $cp$ refer to total neuron and connection parameters, respectively.}}
+\small
+\centering
+\begin{tabular}{c | c c c c| c c c c | c c c }
+\hline\hline
+\multicolumn{12}{ c  } {No length dependant} \\
+[0.5ex]
+\hline\hline
+ & \multicolumn{4}{ c  |} {neurons}  & \multicolumn{4}{ c | } {connections} & \multicolumn{3}{ c  } {dyn param}\\
+\hline
+ & in & out & intern. &  total  & inhib. & excit. & elctr. & total & np & cp &total\\
+\hline
+TWC, & 4 & 2 & 5 &  11 & 15 & 9 & 2 & 26 & 22 & 26 &48\\
+MTWC & 4 & 2 & 5 &  11 & 15 & 9 & 2 & 26 & 22 & 52 & 74\\
+CIFC & 2 & 1 & 7 &  10 & 12 & 7 & 2 & 21 & 20 & 21 & 41\\
+MCIFC & 2 & 1 & 7 &  10 & 12 & 7 & 2 & 21 & 20 & 42 & 62\\
+\hline\hline
+\multicolumn{11}{ c  } {Length dependant} \\
+[0.5ex]
+\hline\hline
+\multicolumn{11}{ c  } {Qbit7} \\
+[0.5ex]
+\hline
+FC & 7 & 1 & 9 &  17 & 40 & 25 & 7 & 72 & 34 & 72 & 106\\
+MFC & 7 & 1 & 9 &  17 & 40 & 25 & 7 & 72 & 34 & 144 & 178\\
+\hline
+\multicolumn{12}{ c  } {Qbit10} \\
+[0.5ex]
+\hline
+FC & 10 & 1 & 15 &  26 & 91 & 58 & 16 & 165 & 52 & 165 & 217\\
+MFC & 10 & 1 & 15 &  26 & 91 & 58 & 16 & 165 & 52 & 330 & 382\\
+\hline
+\multicolumn{12}{ c  } {Qbit13} \\
+[0.5ex]
+\hline
+FC & 13 & 1 & 21 &  35 & 162 & 103 & 29 & 294 & 70 & 294 & 364\\
+MFC & 13 & 1 & 21 &  35 & 162 & 103 & 29 & 294 & 70 & 588 & 658\\
+\hline
+\multicolumn{12}{ c  } {Qbit16} \\
+[0.5ex]
+\hline
+FC & 16 & 1 & 27 &  44 & 252 & 161 & 46 & 459 & 88 & 459 & 547\\
+MFC & 16 & 1 & 27 &  44 & 252 & 161 & 46 & 459 & 88 & 918 & 1006\\
+\hline
+\end{tabular}
+\label{Table:Experiments:ModelSize}
+\vspace{-.5cm}
+\end{table}
+
+
+
+Para obtener fuentes de datos para este análisis se corrieron 
+
+
 ## Analisis estadisticos
 ## Resultados
 ## Conclusiones
