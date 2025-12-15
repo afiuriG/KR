@@ -66,69 +66,173 @@ Como notación se define que el nombre del modelo al que se quiere hacer referen
 
 ### Objeto de estudio
 Dentro de la arquitectura FC, en [2] se presentan algunas variantes. En primer lugar están definidas las FC clásicas, las cuales llamaremos simplemente FC y que son básicamente como se describió anteriormente, aparecen también la variante llamada MFC la que agrega un mecanismo de modulación en el comportamiento de las conexiones y por último aparecen las CIFC y CIMFC las cuales tienen el prefijo CI (por condensed information) debido a que usan sólo dos caracteristicas de entrada por lo tanto tienen sólo dos neuronas en su capa de entrada.   
-Como objeto de estudio tomaremos los modelos que intentan resolver el problema de transmisión de Qubits para una cadena de longitud 10 por lo que las redes FC y MFC tendrán tantas neuronas de entrada como características se les quiera pasar. Según la notación presentada con anterioridad en este trabajo deberíamos llamar a los modelos $CIFC$ y $CIMFC$ como $CIFC_{ci}$ y $CIMFC_{ci}$  respectivamente, estos tienen 2 neuronas de entrada. Los modelos $FC_{k}$ y $MFC_{k}$  para $k \in (r,i)$ tienen 10 neuronas de entrada y por último $FC_{c}$ y $MFC_{c}$ tienen 20 neuronas de entrada. En todos los casos en [2] se mantiene aproximadamente una proporción entre la cantidad de neuronas de entrada y las que tiene la capa intermedia, sólo se usaron modelos con una sola capa intermedia como en [2]. la siguiente tabla muestra la cantidad total de ...... 
+Como objeto de estudio tomaremos los modelos que intentan resolver el problema de transmisión de Qubits para una cadena de longitud 10 por lo que las redes FC y MFC tendrán tantas neuronas de entrada como características se les quiera pasar. Según la notación presentada con anterioridad en este trabajo deberíamos llamar a los modelos $CIFC$ y $CIMFC$ como $CIFC_{ci}$ y $CIMFC_{ci}$  respectivamente, estos tienen 2 neuronas de entrada. Los modelos $FC_{k}$ y $MFC_{k}$  para $k \in (r,i)$ tienen 10 neuronas de entrada y por último $FC_{c}$ y $MFC_{c}$ tienen 20 neuronas de entrada. En todos los casos en [2] se mantiene aproximadamente una proporción entre la cantidad de neuronas de entrada y las que tiene la capa intermedia, sólo se usaron modelos con una sola capa intermedia como en [2]. La siguiente tabla muestra la cantidad total de neuronas, conexiones y parámetros internos de cada arquitectura para el caso de cadenas de longitud 10. 
 
-|Modelo |Neuronas  |Conexiones|Parámetros|
-| :---------- | :---------------------: | :---------------------: | :--------: |
-|campo        |Uno          | Dos  |Tres|
+<table>
+  <tr>
+    <th></th>
+    <th colspan="4">Neuronas</th>
+    <th colspan="4">Conexiones</th>
+    <th colspan="3">Parámetros</th>
+  </tr>
+  <tr>
+    <th>Modelo</th>
+    <th>in</th>
+    <th>out</th>
+    <th>intern</th>
+    <th>totlal</th>
+    <th>inhib.</th>
+    <th>exit.</th>
+    <th>elec.</th>
+    <th>totlal</th>
+    <th>np</th>
+    <th>cp</th>
+    <th>total</th>
+  </tr>
+  <tr>
+    <td>$CIFC$</td>
+    <td>2</td>
+    <td>1</td>
+    <td>7</td>
+    <td>10</td>
+    <td>12</td>
+    <td>7</td>
+    <td>2</td>
+    <td>21</td>
+    <td>20</td>
+    <td>21</td>
+    <td><bf>41</bf></td>
+  </tr>
+  <tr>
+    <td>$MCIFC$</td>
+    <td>2</td>
+    <td>1</td>
+    <td>7</td>
+    <td>10</td>
+    <td>12</td>
+    <td>7</td>
+    <td>2</td>
+    <td>21</td>
+    <td>20</td>
+    <td>42</td>
+    <td>62</td>
+  </tr>
+  <tr>
+    <td>$FC_{r/i}$</td>
+    <td>10</td>
+    <td>1</td>
+    <td>15</td>
+    <td>26</td>
+    <td>91</td>
+    <td>58</td>
+    <td>16</td>
+    <td>165</td>
+    <td>52</td>
+    <td>165</td>
+    <td>217</td>
 
+  </tr>
+  <tr>
+    <td>$MFC_{r/i}$</td>
+    <td>10</td>
+    <td>1</td>
+    <td>15</td>
+    <td>26</td>
+    <td>91</td>
+    <td>58</td>
+    <td>16</td>
+    <td>165</td>
+    <td>52</td>
+    <td>330</td>
+    <td>382</td>
+  </tr>
+  <tr>
+    <td>$FC_{c}$</td>
+    <td>20</td>
+    <td>1</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
 
-\begin{table}
-\vspace{-.0cm}
-\caption{\scriptsize{FANN's dynamical configuration. For each architecture number of neurons and connection are shown grouped by type. $np$ and $cp$ refer to total neuron and connection parameters, respectively.}}
-\small
-\centering
-\begin{tabular}{c | c c c c| c c c c | c c c }
-\hline\hline
-\multicolumn{12}{ c  } {No length dependant} \\
-[0.5ex]
-\hline\hline
- & \multicolumn{4}{ c  |} {neurons}  & \multicolumn{4}{ c | } {connections} & \multicolumn{3}{ c  } {dyn param}\\
-\hline
- & in & out & intern. &  total  & inhib. & excit. & elctr. & total & np & cp &total\\
-\hline
-TWC, & 4 & 2 & 5 &  11 & 15 & 9 & 2 & 26 & 22 & 26 &48\\
-MTWC & 4 & 2 & 5 &  11 & 15 & 9 & 2 & 26 & 22 & 52 & 74\\
-CIFC & 2 & 1 & 7 &  10 & 12 & 7 & 2 & 21 & 20 & 21 & 41\\
-MCIFC & 2 & 1 & 7 &  10 & 12 & 7 & 2 & 21 & 20 & 42 & 62\\
-\hline\hline
-\multicolumn{11}{ c  } {Length dependant} \\
-[0.5ex]
-\hline\hline
-\multicolumn{11}{ c  } {Qbit7} \\
-[0.5ex]
-\hline
-FC & 7 & 1 & 9 &  17 & 40 & 25 & 7 & 72 & 34 & 72 & 106\\
-MFC & 7 & 1 & 9 &  17 & 40 & 25 & 7 & 72 & 34 & 144 & 178\\
-\hline
-\multicolumn{12}{ c  } {Qbit10} \\
-[0.5ex]
-\hline
-FC & 10 & 1 & 15 &  26 & 91 & 58 & 16 & 165 & 52 & 165 & 217\\
-MFC & 10 & 1 & 15 &  26 & 91 & 58 & 16 & 165 & 52 & 330 & 382\\
-\hline
-\multicolumn{12}{ c  } {Qbit13} \\
-[0.5ex]
-\hline
-FC & 13 & 1 & 21 &  35 & 162 & 103 & 29 & 294 & 70 & 294 & 364\\
-MFC & 13 & 1 & 21 &  35 & 162 & 103 & 29 & 294 & 70 & 588 & 658\\
-\hline
-\multicolumn{12}{ c  } {Qbit16} \\
-[0.5ex]
-\hline
-FC & 16 & 1 & 27 &  44 & 252 & 161 & 46 & 459 & 88 & 459 & 547\\
-MFC & 16 & 1 & 27 &  44 & 252 & 161 & 46 & 459 & 88 & 918 & 1006\\
-\hline
-\end{tabular}
-\label{Table:Experiments:ModelSize}
-\vspace{-.5cm}
-\end{table}
+  </tr>
+  <tr>
+    <td>$MFC_{c}$</td>
+    <td>20</td>
+    <td>1</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
 
+Notar que mientras más entradas tiene la red crece significativamente la cantidad de parámetros, con la consecuente diferencia en el uso de recursos computacionales.
 
-
-Para obtener fuentes de datos para este análisis se corrieron 
+Para obtener fuentes de datos para este análisis se entrenaron 60 modelos con cada una de las 8 configuraciones bajo estudio o sea 480 modelos entrenados y se tomas las muestras de tamaño 60 que contienen las fidelidades obtenidas en la evaluación de cada uno de los modelos entrenados.  
 
 
 ## Analisis estadisticos
+La idea del presente trabajo es la de identificar o descartar algún posible impacto en la resolución del problema con respecto a los datos con que son alimentadas las redes neuronales. Llevamos a cabo el análisis estudiando la significancia estadística de las muestras obtenidas en cada configuración. También realizo la comparación relativa de las medias y varianzas obtenidas en cada muestra a forma de análisis mas estandar y complementario. 
+
+En estadística, un resultado o efecto es estadísticamente significativo cuando es improbable que haya sido debido al azar. Una «diferencia estadísticamente significativa» solamente significa que hay evidencias estadísticas de que hay una diferencia; no significa que la diferencia sea grande, importante o radicalmente diferente.
+
+El nivel de significación de una prueba estadística es un concepto estadístico asociado a la verificación de una hipótesis. En pocas palabras, se define como la probabilidad de tomar la decisión de rechazar la hipótesis nula cuando esta es verdadera. La decisión se toma a menudo utilizando el valor p: si el valor p es inferior al nivel de significación, entonces la hipótesis nula es rechazada. Cuanto menor sea el valor p, más significativo será el resultado.
+
+En otros términos, el nivel de significación de un contraste de hipótesis es una probabilidad p tal que la probabilidad de tomar la decisión de rechazar la hipótesis nula —cuando esta es verdadera— no es mayor que p.
+
+Este valor p surge de la ejecución de un test llamado t-test y dependiendo de su valor uno podria concluir que las diferencias observadas entre las muestras no es debido al azar sino que responde a un fenómeno real. En nuestro estudio ejecutamos el t-test de a pares de modelos/entradas (con las muestras recolectadas por los diferentes modelos) para hacer la comparación. 
+
+
 ## Resultados
+Las diferentes ejecuciones de las combinaciones de los t-test son mostrados en la siguiente tabla
+
+<table>
+  <tr>
+    <th>Modelo</th><th>$CIFC$</th><th>$MCIFC$</th><th>$FC_{r}$</th><th>$MFC_{r}$</th><th>$FC_{i}$</th><th>$MFC_{i}$</th><th>$FC_{c}$</th><th>$MFC_{c}$</th>
+  </tr>
+  <tr>
+      <td>$CIFC$</td><td>-</td><td>M</td><td>X</td><td>.</td><td>X</td><td>.</td><td>X</td><td>.</td>
+  </tr>
+  <tr>
+      <td>$MCIFC$</td><td>-</td><td>-</td><td>.</td><td>X</td><td>.</td><td>X</td><td>.</td><td>X</td>
+  </tr>
+  <tr>
+      <td>$FC_{r}$</td><td>-</td><td>-</td><td>-</td><td>M</td><td>X</td><td>.</td><td>X</td><td>.</td>
+  </tr>
+  <tr>
+    <td>$MFC_{r}$</td><td>-</td><td>-</td><td>-</td><td>-</td><td>.</td><td>X</td><td>.</td><td>X</td>
+  </tr>
+  <tr>
+      <td>$FC_{i}$</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>M</td><td>X</td><td>.</td>
+  </tr>
+  <tr>
+      <td>$MFC_{i}$</td><td>-</td>-<td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>.</td><td>X</td>
+  </tr>
+  <tr>
+      <td>$FC_{c}$</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>M</td>
+  </tr>
+  <tr>
+      <td>$MFC_{c}$</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>-<td>-</td><td>-</td>
+  </tr>
+    
+  </tr>
+</table>
+
+
+
+
+
+
+
 ## Conclusiones
