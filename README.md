@@ -17,7 +17,9 @@
 ### Qubit transmission problem
 El problema de tranmisión de Qubits [1] viene de la física cuántica. Un qubit o bit cuántico es la unidad básica de información en computación cuántica, análoga al bit clásico pero con propiedades mucho más ricas debido a los principios de la mecánica cuántica. Una cadena de transmisión de qubits es un sistema o arquitectura diseñada para transportar estados cuánticos es decir, qubits de un lugar a otro sin perder su información cuántica (superposición, amplitudes y posibles correlaciones como el entrelazamiento). En otras palabras, es el equivalente cuántico a una línea de transmisión clásica, pero adaptada para mover información extremadamente delicada que puede perderse con facilidad.
 Podemos pensarla como una cadena de partículas cuánticas interactuando en el tiempo según las leyes de la física cuántica. El estado inicial es con todas las partículas en reposo menos la primera que está en un estado de exitación. Quisiéramos ver la misma exitación sobre la última particula de la cadena pero claramente no es el caso dado que la interacción entre ellas disipa la exitación inicial. Una partícula exitada va estimulando a sus vecinas por lo que se puede apreciar una onda de estimulación viajando en la cadena (por consiguiente se puede observar la posición y amplitud de su cresta). Para tratar de mitigar la pérdida los físicos propusieron entre otras cosas actuar externamente sobre una partícula en cada momento de tiempo con la esperanza de que llegue al final tanta exitación como sea posible con respecto al estado inicial. La cuestión entonces es en qué partícula actuar en cada momento del tiempo y esa es la respuesta que se busca en [2] usando FANN's y RL. En este entorno una solución entonces es un vector con las posiciones de las partículas estimuladas en cada instante de tiempo. La forma de medir cuanta exitación esta llegando al final es con una magnitud física llamada fidelidad, la cual se evalúa luego de aplicar cada estímulo en el orden de tiempo y comparando lo que llega con respecto a lo que había en la primera partícula. Por último el estado de la cadena es un verctor de números complejos (tantos como eslabones tiene la cadena) los cuales son el estado cuántico de cada partícula. Así entonces diremos que el estado de una cadena de longitud $n$ es un vector $\vec{e}=(c_1,...,c_n)$ donde $c_i$ son números complejos.
+<p align="center">
 <img src="QbitChain.png" width="500" />
+</p>
 
 ### FANN & RL
 Las redes FANN [2] son una clase de Red Neuronal Artificial biológicamente inspirada. Esta inspiración viene dada tanto por su arquitectura como por su funcionamiento y composición ya que tienen asociada una dinámica neuronal la cual define que pasa en una neurona que esta siendo estimulada a través de sus conexiones dendríticas, las cuales a su vez pueden ser inhibitorias, exitatorias o eléctricas. Como definidas en [2] tenemos principalmente 4 clases de arquitectura FANN (TWC, FC y sos modificaciones SA). El análisis del presente trabajo esta basado en el uso de las arquitecturas FC ya que se centra en el estudio del impacto de cambiar (en un mismo modelo) la representación del estado de la cadena de transmisión de Qubits y las arquitecturas TWC siempre tienen la misma cantidad de neuronas de entrada mientras que en las FC se puede definir dicha cantidad a necesidad. Por otro lado también quedan excluidas de este análisis las arquitecturas SA ya que cada entrenamiento de éstas en realidad genera una nueva red neuronal diferente a la de otro entrenamiento invalidando la posibilidad aislar la comparación solamente a la representación del estado de la cadena.
@@ -150,30 +152,30 @@ Como objeto de estudio tomaremos los modelos que intentan resolver el problema d
     <td>$FC_{c}$</td>
     <td>20</td>
     <td>1</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>15</td>
+    <td>36</td>
+    <td>91</td>
+    <td>58</td>
+    <td>16</td>
+    <td>315</td>
+    <td>72</td>
+    <td>315</td>
+    <td>387</td>
 
   </tr>
   <tr>
     <td>$MFC_{c}$</td>
     <td>20</td>
     <td>1</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td>15</td>
+    <td>36</td>
+    <td>91</td>
+    <td>58</td>
+    <td>16</td>
+    <td>315</td>
+    <td>72</td>
+    <td>630</td>
+    <td>702</td>
   </tr>
 </table>
 
@@ -182,51 +184,14 @@ Notar que mientras más entradas tiene la red crece significativamente la cantid
 Para obtener fuentes de datos para este análisis se entrenaron 60 modelos con cada una de las 8 configuraciones bajo estudio o sea 480 modelos entrenados y se toman las muestras de tamaño 60 que contienen las fidelidades obtenidas en la evaluación de cada uno de los modelos entrenados.  
 
 
-## Analisis estadisticos
+## Análisis estadísticos
 
 La idea del presente trabajo es la de identificar o descartar algún posible impacto en la resolución del problema con respecto a los datos con que son alimentadas las redes neuronales. Hago primero un análisis estándar con la intensión  de destilar alguna asociación entre la modalidad de entrada con respecto a los resultados obtenidos basado en la comparación relativa de medias y varianzas de las muestras. En segundo término hago un análisis de significancia estadística con pruebas de t-test sobre las muestras intentando descartar que las posibles diferencias sean por azar.
 
 En estadística, un resultado o efecto es estadísticamente significativo cuando es improbable que haya sido debido al azar. Una diferencia estadísticamente significativa solamente significa que hay evidencias estadísticas de que hay una diferencia; no significa que la diferencia sea grande, importante o radicalmente diferente. El nivel de significación de una prueba estadística es un concepto estadístico asociado a la verificación de una hipótesis. En pocas palabras, se define como la probabilidad de tomar la decisión de rechazar la hipótesis nula cuando esta es verdadera. La decisión se toma a menudo utilizando el valor p: si el valor p es inferior al nivel de significación, entonces la hipótesis nula es rechazada. Cuanto menor sea el valor p, más significativo será el resultado. En otros términos, el nivel de significación de un contraste de hipótesis es una probabilidad p tal que la probabilidad de tomar la decisión de rechazar la hipótesis nula —cuando esta es verdadera— no es mayor que p. Este valor p surge de la ejecución de un test llamado t-test y dependiendo de su valor uno podria concluir que las diferencias observadas entre las muestras no es debido al azar sino que responde a un fenómeno real. Esta prueba compara dos muestras por lo que la ejecuto de a pares de modelos/entradas (con las muestras recolectadas por los diferentes modelos) para hacer la comparación. 
 
 
-## Resultados (EN CONSTRUCCIÓN)
-Las diferentes ejecuciones de las combinaciones de los t-test son mostrados en la siguiente tabla
-
-
-<table>
-  <tr>
-    <th>Modelo</th><th>$CIFC$</th><th>$MCIFC$</th><th>$FC_{r}$</th><th>$MFC_{r}$</th><th>$FC_{i}$</th><th>$MFC_{i}$</th><th>$FC_{c}$</th><th>$MFC_{c}$</th>
-  </tr>
-  <tr>
-      <td>$CIFC$</td><td>-</td><td>M</td><td>X</td><td>.</td><td>X</td><td>.</td><td>X</td><td>.</td>
-  </tr>
-  <tr>
-      <td>$MCIFC$</td><td>-</td><td>-</td><td>.</td><td>X</td><td>.</td><td>X</td><td>.</td><td>X</td>
-  </tr>
-  <tr>
-      <td>$FC_{r}$</td><td>-</td><td>-</td><td>-</td><td>M</td><td>X</td><td>.</td><td>X</td><td>.</td>
-  </tr>
-  <tr>
-    <td>$MFC_{r}$</td><td>-</td><td>-</td><td>-</td><td>-</td><td>.</td><td>X</td><td>.</td><td>X</td>
-  </tr>
-  <tr>
-      <td>$FC_{i}$</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>M</td><td>X</td><td>.</td>
-  </tr>
-  <tr>
-      <td>$MFC_{i}$</td><td>-</td>-<td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>.</td><td>X</td>
-  </tr>
-  <tr>
-      <td>$FC_{c}$</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>M</td>
-  </tr>
-  <tr>
-      <td>$MFC_{c}$</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>-<td>-</td><td>-</td>
-  </tr>
-    
-  </tr>
-</table>
-
-
-
+## Resultados
 
 
 
