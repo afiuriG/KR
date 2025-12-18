@@ -202,21 +202,16 @@ En estadística, un resultado o efecto es estadísticamente significativo cuando
 ## Resultados
 El resumen de los resultados obtenidos del entrenamiento y evaluación de los 480 modelos se muestra en el siguiente gráfico, el cual esta acompañado de la tabla de resultados para mayor detalle.
 
-modelo:CIFC, mean:0.756, error:0.339, maximo:0.956
-modelo:FC_c, mean:0.875, error:0.168, maximo:0.957
-modelo:FC_i, mean:0.757, error:0.318, maximo:0.955
-modelo:FC_r, mean:0.888, error:0.131, maximo:0.972
-modelo:MCIFC, mean:0.632, error:0.395, maximo:0.959
-modelo:MFC_c, mean:0.721, error:0.338, maximo:0.958
-modelo:MFC_i, mean:0.64, error:0.393, maximo:0.946
-modelo:MFC_r, mean:0.686, error:0.349, maximo:0.946
 
-<table>
+
+
+<table style="border: none; border-collapse: collapse;">
   <tr>
     <td>
+      <!-- Tabla interna -->
       <table>
         <tr>
-          <th>Modelo/KR</th><th>mean</th><th>var std</th><th>maximo</th>
+          <th>Modelo/KR</th><th>mean</th><th>var. std.</th><th>máximo</th>
         </tr>
         <tr>
           <td>CIFC</td><td>0.756</td><td>0.339</td><td>0.956</td>
@@ -244,16 +239,16 @@ modelo:MFC_r, mean:0.686, error:0.349, maximo:0.946
         </tr>
       </table>  
     </td>
-    
     <td>
-    <img src="TWC.png" width="500" />
+      <!-- Imagen -->
+      <img src="KRComparison.png" width="500" />
     </td>
   </tr>
 </table>
 
+Las columnas de la tabla son autodescriptivas y generan el gráfico a su derecha, sólo queda agregar que en dicho gráfico también esta presente una línea de puntos la cual es un límite autoimpuesto para el mecanismo de early stopping del cual está provisto el entrenamiento. Esta ambisiosa fidelidad surge de la experimentación con estos modelos, es de 0.98 en [2] aunque en el ámbito de la transmisión de qubit un valor considerado suficiente para una transmisión exitosa es con una fidelidad de 0.95.  
 
-
-
+<img src="TTComparison.png" width="500" />
 
 
 
