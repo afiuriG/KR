@@ -189,7 +189,7 @@ Como objeto de estudio tomaremos los modelos que intentan resolver el problema d
 
 Notar que mientras más entradas tiene la red crece significativamente la cantidad de parámetros, con la consecuente diferencia en el uso de recursos computacionales.
 
-Para obtener fuentes de datos para este análisis se entrenaron 60 modelos con cada una de las 8 configuraciones bajo estudio o sea 480 modelos entrenados y se toman las muestras de tamaño 60 que contienen las fidelidades obtenidas en la evaluación de cada uno de los modelos entrenados.  
+Para obtener fuentes de datos para este análisis se entrenaron 60 modelos con cada una de las 8 configuraciones bajo estudio o sea 480 modelos entrenados y se toman las muestras de tamaño 60 que contienen las fidelidades obtenidas en la evaluación de cada uno de los modelos entrenados, la cual consiste en resolver con dicho modelo el problema de transmisión de qubits y recolectar la fidelidad.  
 
 
 ## Análisis estadísticos
@@ -200,6 +200,60 @@ En estadística, un resultado o efecto es estadísticamente significativo cuando
 
 
 ## Resultados
+El resumen de los resultados obtenidos del entrenamiento y evaluación de los 480 modelos se muestra en el siguiente gráfico, el cual esta acompañado de la tabla de resultados para mayor detalle.
+
+modelo:CIFC, mean:0.756, error:0.339, maximo:0.956
+modelo:FC_c, mean:0.875, error:0.168, maximo:0.957
+modelo:FC_i, mean:0.757, error:0.318, maximo:0.955
+modelo:FC_r, mean:0.888, error:0.131, maximo:0.972
+modelo:MCIFC, mean:0.632, error:0.395, maximo:0.959
+modelo:MFC_c, mean:0.721, error:0.338, maximo:0.958
+modelo:MFC_i, mean:0.64, error:0.393, maximo:0.946
+modelo:MFC_r, mean:0.686, error:0.349, maximo:0.946
+
+<table>
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <th>Modelo/KR</th><th>mean</th><th>var std</th><th>maximo</th>
+        </tr>
+        <tr>
+          <td>CIFC</td><td>0.756</td><td>0.339</td><td>0.956</td>
+        </tr>
+        <tr>
+          <td>FC_c</td><td>0.875</td><td>0.168</td><td>0.957</td>
+        </tr>
+        <tr>
+          <td>FC_i</td><td>0.757</td><td>0.318</td><td>0.955</td>
+        </tr>
+        <tr>
+          <td>FC_r</td><td>0.888</td><td>0.131</td><td>0.972</td>
+        </tr>
+        <tr>
+          <td>MCIFC</td><td>0.632</td><td>0.395</td><td>0.959</td>
+        </tr>
+        <tr>
+          <td>MFC_c</td><td>0.721</td><td>0.338</td><td>0.958</td>
+        </tr>
+        <tr>
+          <td>MFC_i</td><td>0.64</td><td>0.393</td><td>0.946</td>
+        </tr>
+        <tr>
+          <td>MFC_r</td><td>0.686</td><td>0.349</td><td>0.946</td>
+        </tr>
+      </table>  
+    </td>
+    
+    <td>
+    <img src="TWC.png" width="500" />
+    </td>
+  </tr>
+</table>
+
+
+
+
 
 
 
