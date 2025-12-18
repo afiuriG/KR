@@ -19,11 +19,7 @@ Este trabajo investiga el impacto de diferentes esquemas de representación del 
 El problema de tranmisión de Qubits [1] viene de la física cuántica. Un qubit o bit cuántico es la unidad básica de información en computación cuántica, análoga al bit clásico pero con propiedades mucho más ricas debido a los principios de la mecánica cuántica. Una cadena de transmisión de qubits es un sistema o arquitectura diseñada para transportar estados cuánticos es decir, qubits de un lugar a otro sin perder su información cuántica (superposición, amplitudes y posibles correlaciones como el entrelazamiento). En otras palabras, es el equivalente cuántico a una línea de transmisión clásica, pero adaptada para mover información extremadamente delicada que puede perderse con facilidad.
 Podemos pensarla como una cadena de partículas cuánticas interactuando en el tiempo según las leyes de la física cuántica. El estado inicial es con todas las partículas en reposo menos la primera que está en un estado de exitación. Quisiéramos ver la misma exitación sobre la última particula de la cadena pero claramente no es el caso dado que la interacción entre ellas disipa la exitación inicial. Una partícula exitada va estimulando a sus vecinas por lo que se puede apreciar una onda de estimulación viajando en la cadena (por consiguiente se puede observar la posición y amplitud de su cresta). Para tratar de mitigar la pérdida los físicos propusieron entre otras cosas actuar externamente sobre una partícula en cada momento de tiempo con la esperanza de que llegue al final tanta exitación como sea posible con respecto al estado inicial. La cuestión entonces es en qué partícula actuar en cada momento del tiempo y esa es la respuesta que se busca en [2] usando FANN's y RL. En este entorno una solución entonces es un vector con las posiciones de las partículas estimuladas en cada instante de tiempo. La forma de medir cuanta exitación esta llegando al final es con una magnitud física llamada fidelidad, la cual se evalúa luego de aplicar cada estímulo en el orden de tiempo y comparando lo que llega con respecto a lo que había en la primera partícula. Por último el estado de la cadena es un verctor de números complejos (tantos como eslabones tiene la cadena) los cuales son el estado cuántico de cada partícula. 
 
-Así entonces diremos que el estado de una cadena de longitud $n$ es un vector
-
-$\vec{e}=(c_1,..,c_n)$ 
-
-donde $c_i$ son números complejos.
+Así entonces diremos que el estado de una cadena de longitud $n$ es un vector $\vec{e}=(c_1,..,c_n)$ donde $c_i$ son números complejos.
 
 <p align="center">
 <img src="QbitChain.png" width="500" />
@@ -247,6 +243,7 @@ El resumen de los resultados obtenidos del entrenamiento y evaluación de los 48
 </table>
 
 Las columnas de la tabla son autodescriptivas y generan el gráfico a su derecha, sólo queda agregar que en dicho gráfico también esta presente una línea de puntos la cual es un límite autoimpuesto para el mecanismo de early stopping del cual está provisto el entrenamiento. Esta ambisiosa fidelidad surge de la experimentación con estos modelos, es de 0.98 en [2] aunque en el ámbito de la transmisión de qubit un valor considerado suficiente para una transmisión exitosa es con una fidelidad de 0.95.  
+Por último en el siguiente gráfico se muestra el resultado de los t-test de a pares.
 
 <img src="TTComparison.png" width="500" />
 
