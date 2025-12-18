@@ -1,15 +1,15 @@
 
-# Analisis de representacion del conocimiento aplicado a FANN para Qbits. 
+# Análisis de representación del conocimiento aplicado a FANN para Qubits. 
 
 
 
 
 ## Abstract
-Este trabajo investiga el impacto de diferentes esquemas de representación del conocimiento en una variedad de modelos inspirados biológicamente que emplean aprendizaje por refuerzo (Reinforcement Learning, RL) para abordar el problema de la transmisión de qubits en sistemas de comunicación cuántica. Partiendo de la premisa de que la forma en que se codifica y estructura la información influye significativamente en la eficiencia del aprendizaje y la adaptación de los agentes, comparamos cuatro variantes del uso de la información. Evaluamos ocho arquitecturas especiales de redes neuronales con inspiracion biológica (FANN), incluyendo algunas dotadas de un mecanismo de modulación sináptica, comparando su rendimiento frente a métricas de fidelidad de transmisión y costos computacionales. Nuestros resultados muestran que...tales mejoran de forma significativa la convergencia de buenas políticas. Las implicaciones de estos hallazgos aportan orientaciones para diseñar agentes de RL eficientes en tareas cuánticas complejas, posicionando la representación del conocimiento como un factor clave para avanzar en la aplicación de métodos bio-inspirados a problemas emergentes de la información cuántica.
+Este trabajo investiga el impacto de diferentes esquemas de representación del conocimiento en una variedad de modelos inspirados biológicamente que emplean aprendizaje por refuerzo (Reinforcement Learning, RL) para abordar el problema de la transmisión de Qubits en sistemas de comunicación cuántica. Partiendo de la premisa de que la forma en que se codifica y estructura la información influye significativamente en la eficiencia del aprendizaje y la adaptación de los agentes, comparamos cuatro variantes del uso de la información. Evaluamos ocho arquitecturas especiales de redes neuronales con inspiración biológica (FANN), incluyendo algunas dotadas de un mecanismo de modulación sináptica, comparando su rendimiento frente a métricas de fidelidad de transmisión y costos computacionales. Nuestros resultados muestran que...tales... mejoran de forma significativa la convergencia de buenas políticas. Las implicaciones de estos hallazgos aportan orientaciones para diseñar agentes de RL eficientes en tareas cuánticas complejas, posicionando la representación del conocimiento como un factor clave para avanzar en la aplicación de métodos bio-inspirados a problemas emergentes de la computación cuántica.
 
 
 
-## Introduccion
+## Introducción
 
 
 ## Background
