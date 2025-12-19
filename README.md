@@ -10,7 +10,7 @@ Este trabajo investiga el impacto de diferentes esquemas de representación del 
 
 
 ## Introducción
-
+....
 
 ## Background
 
@@ -251,3 +251,14 @@ Por último en el siguiente gráfico se muestra el resultado de los t-test de a 
 
 
 ## Conclusiones
+
+En base a los resultados obtenidos en función de la media y la desviación media estándar podemos decir que el modelo $FC_r$ es el mejor ya que tiene la mejor media con el menor error, en conjunción con el mejor máximo obtenido entre los entrenamientos del mismo modelo y en general. Quien lo sigue muy de cerca es el $FC_c$.
+Si intentamos comparar un modelo con su versión dotada de modulación sináptica vemos que en todos los casos esta última tiene peor performance en términos de media y error pero no quedando clara una prefeencia en términos del máxima fidelidad como criterio.
+Otra posibilidad es la de comparar todos los modelos con modulacón para ver que representación seria preferible y lo mismo para los modelos sin modulación y vemos que en este último caso parecen elegibles las representaciones de los reales seguida muy de cerca con la del vector de estado completo, patrón que se repite en los modelos con modulación.
+Por último con respecto al análisis de significancia estadística vemos del último gráfico que podemos decir con cierta tranquilidad que las diferencias entre el modelo $FC_r$ con el resto no son debidas al azar con excepción del modelo $FC_c$ y viceversa, por lo que si ese modelo resulta ser elegible por sobre los demas por las diferencias en performance, estas diferencias son reales. Un comentario final se merece el hecho de que justamente no podamos decir si hay diferencias entre $FC_r$ y $FC_c$ ya que la versión de alimentación con el verctor completo incluye la información proporcionada por la versión de sólo reales $FC_r$. Este hecho sugiere ademas que la dinámica del problema de alguna manera privilegia la informacion sobre la componente real de la onda con respecto a la imaginaria ya que el mismo efecto entre $FC_i$ y $FC_c$ no es observado. Todos estas observaciones aplican también a las versiones con modulación sináptica.
+Entonces como corolario de este estudio se puede decir que podemos elegir resolver el problema con $FC_r$ ya que ademas de las ventajas ya dichas reduce el tiempo de cómputo con respecto a $FC_c$.
+
+
+
+
+
